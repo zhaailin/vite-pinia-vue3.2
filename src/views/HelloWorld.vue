@@ -8,10 +8,10 @@ defineProps({
 
 const count = ref(0);
 const activeIndex2 = ref("1");
+const menus = ref(['pinia','sheep','text'])
 const router = useRouter();
-const clickRoute = () => {
-  console.log(4444, router);
-  router.push("/pinia");
+const clickRoute = (val) => {
+  router.push({name:val});
 };
 </script>
 
@@ -28,10 +28,7 @@ const clickRoute = () => {
           active-text-color="#ffd04b"
           @select="handleSelect"
         >
-          <el-menu-item index="1" @click="clickRoute">测试</el-menu-item>
-          <el-menu-item index="2">Workspace </el-menu-item>
-          <el-menu-item index="3">Info</el-menu-item>
-          <el-menu-item index="4">Orders</el-menu-item>
+          <el-menu-item :index="index" @click="clickRoute(item)" v-for="(item , index) in menus" :key="index">{{item}}</el-menu-item>
         </el-menu></el-header
       >
       <el-container>

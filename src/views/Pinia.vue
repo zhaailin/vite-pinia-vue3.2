@@ -12,11 +12,11 @@
 import { mainStore } from "../store"
 const store = mainStore()
 const changeNum = () =>{
-  store.helloWorld = "傻逼"
+  store.helloWorld = "pinia"
 }
 </script>
 
-<style>
+<style lang="scss">
 .container {
   /* Center the content */
   align-items: center;

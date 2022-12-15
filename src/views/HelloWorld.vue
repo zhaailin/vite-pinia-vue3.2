@@ -1,15 +1,24 @@
 <script setup>
 import { ref } from "vue";
+import { onMounted } from "vue-demi";
 import { useRoute, useRouter } from "vue-router";
+import axios from "../utils/index"
 
 defineProps({
   msg: String,
 });
 
+onMounted(() =>getList())
+
 const count = ref(0);
 const activeIndex2 = ref("1");
-const menus = ref(['pinia','sheep','text'])
+const menus = ref([])
 const router = useRouter();
+const getList = () =>{
+    axios.get("/permission").then(res =>{
+      menus.value = res.data.data
+  })
+}
 const clickRoute = (val) => {
   router.push({name:val});
 };
@@ -18,10 +27,12 @@ const clickRoute = (val) => {
 <template>
   <div class="common-layout">
     <el-container>
-      <el-header style="padding: 0 0 0 200px;">
+      <el-header style="padding: 0 0 0 0;display:flex">
+        <div style="width:200px"><img src="../assets/1.jpg" style="width:200px;height:100%"></div>
         <el-menu
           :default-active="activeIndex2"
           class="el-menu-demo"
+          style="width:calc(100% - 200px)"
           mode="horizontal"
           background-color="#545c64"
           text-color="#fff"
